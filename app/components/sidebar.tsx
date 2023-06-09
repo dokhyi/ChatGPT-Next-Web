@@ -120,7 +120,7 @@ export function SideBar(props: { className?: string }) {
     >
       <div className={styles["sidebar-header"]}>
         <div className={styles["sidebar-title"]}>CICD AI System</div>
-        <div className={styles["sidebar-sub-title"]}>辅助聊天机器人。</div>
+        <div className={styles["sidebar-sub-title"]}>辅助聊天机器人</div>
         <div className={styles["sidebar-logo"] + " no-dark"}>
           <ChatGptIcon />
         </div>
@@ -134,13 +134,14 @@ export function SideBar(props: { className?: string }) {
           onClick={() => navigate(Path.NewChat, { state: { fromHome: true } })}
           shadow
         />
-        <IconButton
+        {/* <IconButton
           icon={<PluginIcon />}
           text={shouldNarrow ? undefined : Locale.Plugin.Name}
           className={styles["sidebar-bar-button"]}
           onClick={() => showToast(Locale.WIP)}
           shadow
-        />
+        /> */}{" "}
+        {/* 插件的按钮暂时隐藏，功能开发中 */}
       </div>
 
       <div
@@ -151,6 +152,18 @@ export function SideBar(props: { className?: string }) {
           }
         }}
       >
+        {/* <div className="home_chat-item__7LfQR" style={{ fontFamily: "Arial", fontSize: "14px",fontWeight: "bold",lineHeight:"2.0" }}>
+        <div
+          onClick={(e) => {
+            window.open("https://blog.csdn.net/cxs812760493/article/details/130544858", "myWindow");
+          }}
+        >
+          CI/CD指南
+        </div>
+        <div style={{ color: "gray", fontSize: "12px",fontWeight: "lighter",lineHeight:"1.5"  }}>
+          它能够为我们带来什么？
+        </div>
+      </div>{/* 需要整合到样式文件，设定更复杂的交互动作，不能以链接跳转的形式，而是要直接在对话框中回答，暂时放弃 */}
         <ChatList narrow={shouldNarrow} />
       </div>
 

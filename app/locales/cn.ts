@@ -10,7 +10,7 @@ const cn = {
     ChatItemCount: (count: number) => `${count} 条对话`,
   },
   Chat: {
-    SubTitle: (count: number) => `与 ChatGPT 的 ${count} 条对话`,
+    SubTitle: (count: number) => `与 CICD BOT 的 ${count} 条对话`,
     Actions: {
       ChatList: "查看消息列表",
       CompressedHistory: "查看压缩后的历史 Prompt",
@@ -41,7 +41,7 @@ const cn = {
     Download: "下载文件",
     Share: "分享到 ShareGPT",
     MessageFromYou: "来自你的消息",
-    MessageFromChatGPT: "来自 ChatGPT 的消息",
+    MessageFromChatGPT: "来自 CICD BOT 的消息",
     Format: {
       Title: "导出格式",
       SubTitle: "可以导出 Markdown 文本或者 PNG 图片",
@@ -176,7 +176,17 @@ const cn = {
   },
   Store: {
     DefaultTopic: "新的聊天",
-    BotHello: "有什么可以帮你的吗",
+    BotHello:
+      `### 你好，我是CICD Bot助手！\n` +
+      `_作为一个人工智能语言模型，我可以回答你的问题，帮助你高效便捷地获取信息、知识和灵感_。\n` +
+      "\n" +
+      `点击左下角的[设置](/#/settings)按钮输入密码后**解锁使用**。
+    常见问题与使用说明点击查看 **[可能是个飞书链接](https://baidu.com)**
+    卡顿或无相应？可能是此时访问人数较多。[点击这里与CICD反馈意见](https://baidu.com)\n` +
+      `选择一个[**助手**](/#/new-chat)或者在对话框键入"/"选择提示词，快速与我展开对话吧\n` +
+      `\n` +
+      `**友情提示**: 请遵循测试规则，我可能无法回答不合适的问题。`,
+    // 以上为问候语，通过md语法来编辑。
     Error: "出错了，稍后重试吧",
     Prompt: {
       History: (content: string) => "这是历史聊天总结作为前情提要：" + content,
@@ -201,11 +211,12 @@ const cn = {
     Name: "插件",
   },
   Mask: {
-    Name: "面具",
+    Name: "选择想要展开对话的CICD助手吧！",
+    // 原本是面具，因为暂时隐藏了插件按钮，为了填补空白加了一些字。
     Page: {
-      Title: "预设角色面具",
-      SubTitle: (count: number) => `${count} 个预设角色定义`,
-      Search: "搜索角色面具",
+      Title: "预设助手角色面具",
+      SubTitle: (count: number) => `${count} 个预设助手角色定义`,
+      Search: "搜索助手角色面具",
       Create: "新建",
     },
     Item: {
