@@ -279,22 +279,49 @@ function ClearContextDivider() {
   );
 }
 
+// function useScrollToBottom() {
+//   // for auto-scroll
+//   const scrollRef = useRef<HTMLDivElement>(null);
+//   const [autoScroll, setAutoScroll] = useState(true);
+//   const scrollToBottom = () => {
+//     const dom = scrollRef.current;
+//     if (dom) {
+//       setTimeout(() => (dom.scrollTop = dom.scrollHeight), 1);
+//     }
+//   };
+
+//   // auto scroll
+//   useLayoutEffect(() => {
+//     autoScroll && scrollToBottom();
+//   });
+
+//   return {
+//     scrollRef,
+//     autoScroll,
+//     setAutoScroll,
+//     scrollToBottom,
+//   };
+// }
+
 function useScrollToBottom() {
-  // for auto-scroll
   const scrollRef = useRef<HTMLDivElement>(null);
   const [autoScroll, setAutoScroll] = useState(true);
   const scrollToBottom = () => {
-    const dom = scrollRef.current;
-    if (dom) {
-      setTimeout(() => (dom.scrollTop = dom.scrollHeight), 1);
-    }
+    setTimeout(() => {
+      const dom = scrollRef.current;
+      if (dom) {
+        dom.scrollTo({
+          top: dom.scrollHeight,
+          behavior: "smooth",
+        });
+      }
+    }, 1000);
+    //服务器性能越差，延时应该越高
   };
 
-  // auto scroll
   useLayoutEffect(() => {
     autoScroll && scrollToBottom();
   });
-
   return {
     scrollRef,
     autoScroll,
@@ -548,6 +575,11 @@ export function Chat() {
     }
   };
   const onRightClick = (e: any, message: ChatMessage) => {
+    // auto fill user input
+    if (message.role === "user") {
+      setUserInput(message.content);
+    }
+
     // copy to clipboard
     if (selectOrCopy(e.currentTarget, message.content)) {
       e.preventDefault();
@@ -734,7 +766,8 @@ export function Chat() {
         ref={scrollRef}
         onScroll={(e) => onChatBodyScroll(e.currentTarget)}
         onMouseDown={() => inputRef.current?.blur()}
-        onWheel={(e) => setAutoScroll(hitBottom && e.deltaY > 0)}
+        // onWheel={(e) => setAutoScroll(hitBottom && e.deltaY > 0)}
+        onWheel={(e) => setAutoScroll(false)}
         onTouchStart={() => {
           inputRef.current?.blur();
           setAutoScroll(false);
